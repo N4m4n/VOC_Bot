@@ -4,7 +4,7 @@ from telegram.constants import ParseMode
 import json
 from forwarder import bot
 import forwarder
-
+from forwarder.utils import get_source
 PM_START_TEXT = """
 Hey {}, I'm {}!
 I'm a bot used to forward messages from one chat to another.
@@ -87,3 +87,9 @@ async def new_chat_members(update: Update, context):
 bot.add_handler(CommandHandler("start", start))
 bot.add_handler(CommandHandler("help", help))
 bot.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, new_chat_members))
+bot.add_handler(MessageHandler(~filters.COMMAND
+                               & ~filters.Chat([source["chat_id"] for source in get_source()]) 
+                               & filters.ChatType.GROUPS, new_chat_members))
+bot.add_handler(MessageHandler(~filters.COMMAND
+                               & ~filters.Chat([source["chat_id"] for source in get_source()]) 
+                               & filters.ChatType.CHANNEL, new_chat_members))
