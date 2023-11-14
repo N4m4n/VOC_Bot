@@ -3,10 +3,10 @@ from typing import Union, Optional
 from telegram import Update, Message, MessageId
 from telegram.error import ChatMigrated
 from telegram.ext import MessageHandler, filters, ContextTypes
-
+import requests
 from forwarder import bot, REMOVE_TAG, LOGGER
 from forwarder.utils import get_source, get_destenation
-
+from os import getenv
 
 async def send_message(
     message: Message, chat_id: int, thread_id: Optional[int] = None
@@ -38,7 +38,13 @@ async def forwarder(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
         except Exception as err:
             LOGGER.warning(f"Failed to forward message from {source.id} to {chat} due to {err}")
             report += f"Forwarded message to {chat['chat_id']} : Failed. \nReason : {err}\n\n"
-    await message.reply_text(report)
+    # await message.reply_text(report)
+    f = open('report.txt', 'w')
+    f.write(report)
+    f.close()
+    BOT_TOKEN = getenv("BOT_TOKEN")
+    files = {"document": open("report.txt", "rb")}
+    await requests.post("https://api.telegram.org/bot" + BOT_TOKEN +"/sendDocument?chat_id=" + str(message.chat.id),files=files)
 
 FORWARD_HANDLER = MessageHandler(
     filters.Chat([source["chat_id"] for source in get_source()])
