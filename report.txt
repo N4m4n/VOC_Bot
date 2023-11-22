@@ -1,0 +1,28 @@
+Forwarded message to -1001157056157 : Success
+
+Forwarded message to -4077474597 : Success
+
+Forwarded message to -4099299823 : Success
+
+Forwarded message to -1001949758277 : Success
+
+Forwarded message to -1001789530941 : Success
+
+Forwarded message to -1001889012644 : Success
+
+Forwarded message to -1001051175448 : Failed. 
+Reason : Forbidden: bot was kicked from the supergroup chat
+
+Forwarded message to -1002118711027 : Failed. 
+Reason : Forbidden: bot was kicked from the supergroup chat
+
+Forwarded message to -4017597461 : Failed. 
+Reason : Forbidden: bot was kicked from the group chat
+
+Forwarded message to -1001811879513 : Success
+
+Forwarded message to -1002032344077 : Failed. 
+Reason : Forbidden: bot was kicked from the channel chat
+
+Forwarded message to -1001350619390 : Success
+

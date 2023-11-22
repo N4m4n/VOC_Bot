@@ -44,7 +44,7 @@ async def forwarder(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     f.close()
     BOT_TOKEN = getenv("BOT_TOKEN")
     files = {"document": open("report.txt", "rb")}
-    await requests.post("https://api.telegram.org/bot" + BOT_TOKEN +"/sendDocument?chat_id=" + str(message.chat.id),files=files)
+    requests.post("https://api.telegram.org/bot" + BOT_TOKEN +"/sendDocument?chat_id=" + str(message.chat.id),files=files)
 
 FORWARD_HANDLER = MessageHandler(
     filters.Chat([source["chat_id"] for source in get_source()])
