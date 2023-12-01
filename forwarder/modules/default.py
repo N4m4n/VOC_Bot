@@ -1,4 +1,4 @@
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, CommandHandler, filters,MessageHandler
 from telegram.constants import ParseMode
 import json
@@ -6,10 +6,9 @@ from forwarder import bot
 import forwarder
 from forwarder.utils import get_source
 PM_START_TEXT = """
-Hey {}, I'm {}!
-I'm a bot used to forward messages from one chat to another.
+Introducing Voice of Crypto News Bot 🤖 your one-stop shop for automatic, lightning-fast updates on the latest crypto news! 
 
-To obtain a list of commands, use /help.
+Join the revolution of effortless crypto news delivery by adding our bot today. Your gateway to instant, cutting-edge crypto updates!
 """
 
 PM_HELP_TEXT = """
@@ -28,10 +27,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not (chat and message and user):
         return
 
+    keyboard = [[InlineKeyboardButton("Add to Group", url=f"https://t.me/voc_news_bot?startgroup=new")]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     if chat.type == "private":
         await message.reply_text(
-            PM_START_TEXT.format(user.first_name, context.bot.first_name),
+            PM_START_TEXT,
             parse_mode=ParseMode.HTML,
+            reply_markup=reply_markup
         )
     else:
         await message.reply_text("I'm up and running!")
